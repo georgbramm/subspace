@@ -163,10 +163,10 @@ cat <<WGSERVER >/data/wireguard/server.conf
 PrivateKey = $(cat /data/wireguard/server.private)
 ListenPort = ${SUBSPACE_LISTENPORT}
 FwMark = 0x2
-PostUp = ip route add default via 51.77.117.254 dev eno3 table wire-pvt
-PostUp = ip rule add fwmark 0x2 table wire-pvt
-PreDown = ip route del default via 51.77.117.254 dev eno3 table wire-pvt
-PreDown = ip rule del fwmark 0x2 table wire-pvt
+PostUp = /usr/sbin/ip route add default via 51.77.117.254 dev eno3 table wire-pvt
+PostUp = /usr/sbin/ip rule add fwmark 0x2 table wire-pvt
+PreDown = /usr/sbin/ip route del default via 51.77.117.254 dev eno3 table wire-pvt
+PreDown = /usr/sbin/ip rule del fwmark 0x2 table wire-pvt
 
 WGSERVER
 cat /data/wireguard/peers/*.conf >>/data/wireguard/server.conf
